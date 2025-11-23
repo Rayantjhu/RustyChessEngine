@@ -113,26 +113,26 @@ impl Move for u64 {
     }
 
     fn move_left_by(self, amount: u8) -> Self {
-        self << 1 * amount
+        self << amount
     }
 
     fn move_right_by(self, amount: u8) -> Self {
-        self >> 1 * amount
+        self >> amount
     }
 
     fn move_diagonally_up_left_by(self, amount: u8) -> Self {
-        self >> (constants::BOARD_SIZE * amount - amount)
+        self >> constants::BOARD_SIZE * amount - amount
     }
 
     fn move_diagonally_up_right_by(self, amount: u8) -> Self {
-        self >> (constants::BOARD_SIZE * amount + amount)
+        self >> constants::BOARD_SIZE * amount + amount
     }
 
     fn move_diagonally_down_left_by(self, amount: u8) -> Self {
-        self << (constants::BOARD_SIZE * amount + amount)
+        self << constants::BOARD_SIZE * amount + amount
     }
 
     fn move_diagonally_down_right_by(self, amount: u8) -> Self {
-        self << (constants::BOARD_SIZE * amount - amount)
+        self << constants::BOARD_SIZE * amount - amount
     }
 }
