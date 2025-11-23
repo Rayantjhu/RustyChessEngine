@@ -1,5 +1,46 @@
 use crate::constants;
 
+pub mod bishop {
+    use crate::constants;
+    use crate::move_generation::Move;
+
+    pub fn generate_moves(current_position: u64) -> u64 {
+        let mut possible_moves = 0u64;
+
+        // Only generate moves to the right if it's not already on the h-file.
+        if current_position & constants::H_FILE == 0 {
+            for amount_to_move in 1..constants::BOARD_SIZE {
+                let right = current_position.move_right_by(amount_to_move);
+
+                possible_moves |= current_position.move_diagonally_up_right_by(amount_to_move)
+                    | current_position.move_diagonally_down_right_by(amount_to_move);
+
+                // Short circuit if the piece is now on the h-file, as it can't go further right.
+                if right & constants::H_FILE != 0 {
+                    break;
+                }
+            }
+        }
+
+        // Only generate moves to the left if it's not already on the a-file.
+        if current_position & constants::A_FILE == 0 {
+            for amount_to_move in 1..constants::BOARD_SIZE {
+                let left = current_position.move_left_by(amount_to_move);
+
+                possible_moves |= current_position.move_diagonally_up_left_by(amount_to_move)
+                    | current_position.move_diagonally_down_left_by(amount_to_move);
+
+                // Short circuit if the piece is now on the a-file, as it can't go further left.
+                if left & constants::A_FILE != 0 {
+                    break;
+                }
+            }
+        }
+
+        possible_moves
+    }
+}
+
 pub mod rook {
     use crate::constants;
     use crate::move_generation::Move;

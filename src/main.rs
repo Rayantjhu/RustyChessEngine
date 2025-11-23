@@ -4,6 +4,7 @@ mod print_board;
 mod read_board;
 
 fn main() {
+    print_all_piece_moves(move_generation::bishop::generate_moves);
     print_all_piece_moves(move_generation::rook::generate_moves);
     print_all_piece_moves(move_generation::queen::generate_moves);
 }
